@@ -1,6 +1,4 @@
 # KAVEEP-SIA
-KAVEEP System Intelligence Agent
-# KAVEEP-SIA
 
 KAVEEP System Intelligence Agent (SIA)
 

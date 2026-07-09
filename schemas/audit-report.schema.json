@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaveep.local/sia/schemas/audit-report.schema.json",
+  "title": "KAVEEP-SIA Audit Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "generatedAt",
+    "sessionId",
+    "auditSummary",
+    "history",
+    "recoveryMetadata",
+    "warnings",
+    "errors"
+  ],
+  "properties": {
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "sessionId": { "type": "string" },
+    "auditSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scanReports",
+        "classificationReports",
+        "recommendationReports",
+        "decisionReports",
+        "simulationReports",
+        "warningCount",
+        "errorCount"
+      ],
+      "properties": {
+        "scanReports": { "type": "integer", "minimum": 0 },
+        "classificationReports": { "type": "integer", "minimum": 0 },
+        "recommendationReports": { "type": "integer", "minimum": 0 },
+        "decisionReports": { "type": "integer", "minimum": 0 },
+        "simulationReports": { "type": "integer", "minimum": 0 },
+        "warningCount": { "type": "integer", "minimum": 0 },
+        "errorCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "history": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/historyRecord" }
+    },
+    "recoveryMetadata": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/recoveryRecord" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/message" }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/message" }
+    }
+  },
+  "$defs": {
+    "historyRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recordId",
+        "module",
+        "moduleVersion",
+        "timestamp",
+        "reportType",
+        "reportHash",
+        "riskLevel",
+        "status",
+        "notes"
+      ],
+      "properties": {
+        "recordId": { "type": "string" },
+        "module": { "type": "string" },
+        "moduleVersion": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "reportType": { "type": "string" },
+        "reportHash": { "type": "string" },
+        "riskLevel": { "$ref": "#/$defs/riskLevel" },
+        "status": { "$ref": "#/$defs/status" },
+        "notes": { "type": "string" }
+      }
+    },
+    "recoveryRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relatedReportId",
+        "relatedSessionId",
+        "plannedActionId",
+        "estimatedReversibility",
+        "requiredConfirmationLevel",
+        "recoveryReadiness",
+        "notes"
+      ],
+      "properties": {
+        "relatedReportId": { "type": "string" },
+        "relatedSessionId": { "type": "string" },
+        "plannedActionId": { "type": "string" },
+        "estimatedReversibility": { "type": "string" },
+        "requiredConfirmationLevel": { "type": "string" },
+        "recoveryReadiness": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "protected", "unknown"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["recorded", "append_only", "blocked", "needs_more_review", "UNVERIFIED"]
+    }
+  }
+}
+

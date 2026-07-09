@@ -1,0 +1,50 @@
+{
+  "scanTarget": "C:\\Users\\ExampleUser\\Downloads",
+  "classifiedAt": "2026-07-09T08:05:00Z",
+  "totalFiles": 42,
+  "categories": {
+    "documents": { "count": 4, "totalSizeBytes": 2048000 },
+    "images": { "count": 6, "totalSizeBytes": 12000000 },
+    "videos": { "count": 1, "totalSizeBytes": 950000000 },
+    "audio": { "count": 0, "totalSizeBytes": 0 },
+    "archives": { "count": 3, "totalSizeBytes": 650000000 },
+    "installers": { "count": 2, "totalSizeBytes": 180000000 },
+    "applications": { "count": 0, "totalSizeBytes": 0 },
+    "temporaryFiles": { "count": 1, "totalSizeBytes": 4096 },
+    "cacheFiles": { "count": 0, "totalSizeBytes": 0 },
+    "logs": { "count": 2, "totalSizeBytes": 64000 },
+    "developmentFiles": { "count": 0, "totalSizeBytes": 0 },
+    "sourceCode": { "count": 0, "totalSizeBytes": 0 },
+    "projectFiles": { "count": 1, "totalSizeBytes": 1500000 },
+    "databaseFiles": { "count": 0, "totalSizeBytes": 0 },
+    "systemFiles": { "count": 0, "totalSizeBytes": 0 },
+    "unknownFiles": { "count": 1, "totalSizeBytes": 12345 }
+  },
+  "riskLevels": {
+    "low": 8,
+    "medium": 30,
+    "high": 1,
+    "protected": 2,
+    "unknown": 1
+  },
+  "protectedFiles": [
+    {
+      "path": "C:\\Users\\ExampleUser\\Downloads\\ExampleProject\\.env",
+      "category": "projectFiles",
+      "riskLevel": "protected",
+      "reason": "Environment file must not be recommended for cleanup.",
+      "status": "protected"
+    }
+  ],
+  "unknownFiles": [
+    {
+      "path": "C:\\Users\\ExampleUser\\Downloads\\unknown.samplebin",
+      "category": "unknownFiles",
+      "riskLevel": "unknown",
+      "reason": "Extension is not recognized from metadata-only rules.",
+      "status": "needs_more_review"
+    }
+  ],
+  "errors": []
+}
+

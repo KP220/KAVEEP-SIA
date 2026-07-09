@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaveep.local/sia/schemas/storage-report.schema.json",
+  "title": "KAVEEP-SIA Storage Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scanTarget",
+    "generatedAt",
+    "totalSizeBytes",
+    "usedSpaceBytes",
+    "freeSpaceBytes",
+    "fileCount",
+    "folderCount",
+    "largestFiles",
+    "largestFolders",
+    "duplicateCandidates",
+    "temporaryFileCandidates",
+    "riskyLocations",
+    "errors"
+  ],
+  "properties": {
+    "scanTarget": { "type": "string" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "totalSizeBytes": { "type": "integer", "minimum": 0 },
+    "usedSpaceBytes": { "type": "integer", "minimum": 0 },
+    "freeSpaceBytes": { "type": "integer", "minimum": 0 },
+    "fileCount": { "type": "integer", "minimum": 0 },
+    "folderCount": { "type": "integer", "minimum": 0 },
+    "largestFiles": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/storageItem" }
+    },
+    "largestFolders": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/storageItem" }
+    },
+    "duplicateCandidates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/duplicateCandidate" }
+    },
+    "temporaryFileCandidates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/storageItem" }
+    },
+    "riskyLocations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/riskyLocation" }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/error" }
+    }
+  },
+  "$defs": {
+    "storageItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sizeBytes", "riskLevel"],
+      "properties": {
+        "path": { "type": "string" },
+        "sizeBytes": { "type": "integer", "minimum": 0 },
+        "lastModifiedAt": { "type": "string", "format": "date-time" },
+        "riskLevel": { "$ref": "#/$defs/riskLevel" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "duplicateCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidateId", "paths", "sizeBytes", "evidence", "riskLevel"],
+      "properties": {
+        "candidateId": { "type": "string" },
+        "paths": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
+        "sizeBytes": { "type": "integer", "minimum": 0 },
+        "evidence": { "type": "string" },
+        "riskLevel": { "$ref": "#/$defs/riskLevel" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "riskyLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "reason", "riskLevel"],
+      "properties": {
+        "path": { "type": "string" },
+        "reason": { "type": "string" },
+        "riskLevel": { "$ref": "#/$defs/riskLevel" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "path": { "type": "string" },
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "protected", "unknown"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["observed", "candidate", "protected", "blocked", "needs_more_review", "UNVERIFIED"]
+    }
+  }
+}
+

@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaveep.local/sia/schemas/simulation-report.schema.json",
+  "title": "KAVEEP-SIA Simulation Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "generatedAt",
+    "sourceDecisionReport",
+    "summary",
+    "executionPlan",
+    "excludedItems",
+    "blockedItems",
+    "warnings",
+    "errors"
+  ],
+  "properties": {
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "sourceDecisionReport": { "type": "string" },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "totalApprovedItems",
+        "plannedItems",
+        "blockedItems",
+        "excludedItems",
+        "estimatedStorageSavingsBytes",
+        "estimatedAffectedFiles",
+        "estimatedAffectedFolders"
+      ],
+      "properties": {
+        "totalApprovedItems": { "type": "integer", "minimum": 0 },
+        "plannedItems": { "type": "integer", "minimum": 0 },
+        "blockedItems": { "type": "integer", "minimum": 0 },
+        "excludedItems": { "type": "integer", "minimum": 0 },
+        "estimatedStorageSavingsBytes": { "type": "integer", "minimum": 0 },
+        "estimatedAffectedFiles": { "type": "integer", "minimum": 0 },
+        "estimatedAffectedFolders": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "executionPlan": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/planItem" }
+    },
+    "excludedItems": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/excludedItem" }
+    },
+    "blockedItems": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/excludedItem" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/message" }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/message" }
+    }
+  },
+  "$defs": {
+    "planItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "itemId",
+        "path",
+        "proposedAction",
+        "simulationType",
+        "riskLevel",
+        "confirmationLevel",
+        "estimatedStorageImpactBytes",
+        "reversibilityEstimate",
+        "safetyStatus",
+        "blocked"
+      ],
+      "properties": {
+        "itemId": { "type": "string" },
+        "path": { "type": "string" },
+        "proposedAction": { "type": "string" },
+        "simulationType": {
+          "type": "string",
+          "enum": [
+            "cleanup_dry_run",
+            "move_dry_run",
+            "rename_dry_run",
+            "archive_dry_run",
+            "duplicate_resolution_dry_run",
+            "temporary_file_cleanup_dry_run",
+            "installer_cleanup_dry_run",
+            "large_file_review_dry_run"
+          ]
+        },
+        "riskLevel": { "$ref": "#/$defs/riskLevel" },
+        "confirmationLevel": {
+          "type": "string",
+          "enum": [
+            "none_allowed",
+            "single_confirmation_required",
+            "double_confirmation_required",
+            "manual_only",
+            "blocked"
+          ]
+        },
+        "estimatedStorageImpactBytes": { "type": "integer", "minimum": 0 },
+        "reversibilityEstimate": { "type": "string" },
+        "safetyStatus": { "type": "string" },
+        "blocked": { "type": "boolean" },
+        "blockReason": { "type": "string" }
+      }
+    },
+    "excludedItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["itemId", "path", "reason", "status"],
+      "properties": {
+        "itemId": { "type": "string" },
+        "path": { "type": "string" },
+        "reason": { "type": "string" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "path": { "type": "string" },
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "protected", "unknown"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["planned_dry_run", "excluded", "blocked", "needs_more_review", "UNVERIFIED"]
+    }
+  }
+}
+

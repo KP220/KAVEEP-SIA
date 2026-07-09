@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaveep.local/sia/schemas/classification-report.schema.json",
+  "title": "KAVEEP-SIA Classification Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scanTarget",
+    "classifiedAt",
+    "totalFiles",
+    "categories",
+    "riskLevels",
+    "protectedFiles",
+    "unknownFiles",
+    "errors"
+  ],
+  "properties": {
+    "scanTarget": { "type": "string" },
+    "classifiedAt": { "type": "string", "format": "date-time" },
+    "totalFiles": { "type": "integer", "minimum": 0 },
+    "categories": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documents",
+        "images",
+        "videos",
+        "audio",
+        "archives",
+        "installers",
+        "applications",
+        "temporaryFiles",
+        "cacheFiles",
+        "logs",
+        "developmentFiles",
+        "sourceCode",
+        "projectFiles",
+        "databaseFiles",
+        "systemFiles",
+        "unknownFiles"
+      ],
+      "properties": {
+        "documents": { "$ref": "#/$defs/categorySummary" },
+        "images": { "$ref": "#/$defs/categorySummary" },
+        "videos": { "$ref": "#/$defs/categorySummary" },
+        "audio": { "$ref": "#/$defs/categorySummary" },
+        "archives": { "$ref": "#/$defs/categorySummary" },
+        "installers": { "$ref": "#/$defs/categorySummary" },
+        "applications": { "$ref": "#/$defs/categorySummary" },
+        "temporaryFiles": { "$ref": "#/$defs/categorySummary" },
+        "cacheFiles": { "$ref": "#/$defs/categorySummary" },
+        "logs": { "$ref": "#/$defs/categorySummary" },
+        "developmentFiles": { "$ref": "#/$defs/categorySummary" },
+        "sourceCode": { "$ref": "#/$defs/categorySummary" },
+        "projectFiles": { "$ref": "#/$defs/categorySummary" },
+        "databaseFiles": { "$ref": "#/$defs/categorySummary" },
+        "systemFiles": { "$ref": "#/$defs/categorySummary" },
+        "unknownFiles": { "$ref": "#/$defs/categorySummary" }
+      }
+    },
+    "riskLevels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["low", "medium", "high", "protected", "unknown"],
+      "properties": {
+        "low": { "type": "integer", "minimum": 0 },
+        "medium": { "type": "integer", "minimum": 0 },
+        "high": { "type": "integer", "minimum": 0 },
+        "protected": { "type": "integer", "minimum": 0 },
+        "unknown": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "protectedFiles": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/classifiedItem" }
+    },
+    "unknownFiles": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/classifiedItem" }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/error" }
+    }
+  },
+  "$defs": {
+    "categorySummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "totalSizeBytes"],
+      "properties": {
+        "count": { "type": "integer", "minimum": 0 },
+        "totalSizeBytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "classifiedItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "category", "riskLevel", "reason"],
+      "properties": {
+        "path": { "type": "string" },
+        "category": { "type": "string" },
+        "riskLevel": { "$ref": "#/$defs/riskLevel" },
+        "reason": { "type": "string" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "path": { "type": "string" },
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "protected", "unknown"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["classified", "protected", "blocked", "needs_more_review", "UNVERIFIED"]
+    }
+  }
+}
+

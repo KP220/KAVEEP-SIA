@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "validate:examples": "node tools/validate-examples.mjs"
+  }
+}
+

@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-07-09T08:15:00Z",
+  "sourceRecommendationReport": "recommendation-report.example.json",
+  "summary": {
+    "totalItems": 2,
+    "approvedCount": 1,
+    "rejectedCount": 0,
+    "manualReviewCount": 1,
+    "protectedCount": 1,
+    "conflictCount": 0
+  },
+  "decisions": [
+    {
+      "itemId": "rec-001",
+      "path": "C:\\Users\\ExampleUser\\Downloads\\sample-installer.exe",
+      "recommendationType": "likely_installer",
+      "riskLevel": "medium",
+      "suggestedAction": "Review manually before any future action.",
+      "decision": "approve_for_future_action",
+      "approvedForFutureAction": true,
+      "manualReviewRequired": true,
+      "blocked": false,
+      "blockReason": "",
+      "userReason": "Example approval for dry-run planning only.",
+      "decidedAt": "2026-07-09T08:14:00Z"
+    },
+    {
+      "itemId": "rec-002",
+      "path": "C:\\Users\\ExampleUser\\Downloads\\ExampleProject\\.env",
+      "recommendationType": "do_not_touch",
+      "riskLevel": "protected",
+      "suggestedAction": "Do not touch.",
+      "decision": "keep_protected",
+      "approvedForFutureAction": false,
+      "manualReviewRequired": true,
+      "blocked": true,
+      "blockReason": "Protected environment file.",
+      "userReason": "Protected by policy.",
+      "decidedAt": "2026-07-09T08:14:30Z"
+    }
+  ],
+  "conflicts": [],
+  "protectedItems": [
+    {
+      "path": "C:\\Users\\ExampleUser\\Downloads\\ExampleProject\\.env",
+      "reason": "Protected environment file.",
+      "riskLevel": "protected",
+      "status": "protected"
+    }
+  ],
+  "errors": []
+}
+

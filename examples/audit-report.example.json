@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-07-09T08:25:00Z",
+  "sessionId": "session-example-001",
+  "auditSummary": {
+    "scanReports": 1,
+    "classificationReports": 1,
+    "recommendationReports": 1,
+    "decisionReports": 1,
+    "simulationReports": 1,
+    "warningCount": 1,
+    "errorCount": 0
+  },
+  "history": [
+    {
+      "recordId": "audit-001",
+      "module": "Storage Analyzer",
+      "moduleVersion": "0.1",
+      "timestamp": "2026-07-09T08:00:00Z",
+      "reportType": "storage",
+      "reportHash": "sha256-example-storage-hash",
+      "riskLevel": "medium",
+      "status": "append_only",
+      "notes": "Example storage report recorded from fake paths."
+    },
+    {
+      "recordId": "audit-002",
+      "module": "Simulation & Execution Planning Engine",
+      "moduleVersion": "0.1",
+      "timestamp": "2026-07-09T08:20:00Z",
+      "reportType": "simulation",
+      "reportHash": "sha256-example-simulation-hash",
+      "riskLevel": "medium",
+      "status": "recorded",
+      "notes": "Dry-run plan only; no action executed."
+    }
+  ],
+  "recoveryMetadata": [
+    {
+      "relatedReportId": "simulation-report.example.json",
+      "relatedSessionId": "session-example-001",
+      "plannedActionId": "rec-001",
+      "estimatedReversibility": "Unknown until future action engine exists.",
+      "requiredConfirmationLevel": "double_confirmation_required",
+      "recoveryReadiness": "not_ready_v0_1",
+      "notes": "Recovery metadata only; no recovery action exists."
+    }
+  ],
+  "warnings": [
+    {
+      "code": "RECOVERY_NOT_IMPLEMENTED",
+      "message": "Version 0.1 prepares recovery metadata only.",
+      "status": "recorded"
+    }
+  ],
+  "errors": []
+}
+

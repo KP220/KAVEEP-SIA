@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-07-09T08:20:00Z",
+  "sourceDecisionReport": "decision-report.example.json",
+  "summary": {
+    "totalApprovedItems": 1,
+    "plannedItems": 1,
+    "blockedItems": 1,
+    "excludedItems": 1,
+    "estimatedStorageSavingsBytes": 180000000,
+    "estimatedAffectedFiles": 1,
+    "estimatedAffectedFolders": 0
+  },
+  "executionPlan": [
+    {
+      "itemId": "rec-001",
+      "path": "C:\\Users\\ExampleUser\\Downloads\\sample-installer.exe",
+      "proposedAction": "Manual review before possible future cleanup.",
+      "simulationType": "installer_cleanup_dry_run",
+      "riskLevel": "medium",
+      "confirmationLevel": "double_confirmation_required",
+      "estimatedStorageImpactBytes": 180000000,
+      "reversibilityEstimate": "Unknown until a future action engine defines rollback.",
+      "safetyStatus": "dry-run only",
+      "blocked": false,
+      "blockReason": ""
+    }
+  ],
+  "excludedItems": [
+    {
+      "itemId": "rec-002",
+      "path": "C:\\Users\\ExampleUser\\Downloads\\ExampleProject\\.env",
+      "reason": "Protected item cannot enter execution plan.",
+      "status": "excluded"
+    }
+  ],
+  "blockedItems": [
+    {
+      "itemId": "rec-002",
+      "path": "C:\\Users\\ExampleUser\\Downloads\\ExampleProject\\.env",
+      "reason": "Protected environment file.",
+      "status": "blocked"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "DRY_RUN_ONLY",
+      "message": "Simulation report does not execute actions.",
+      "status": "planned_dry_run"
+    }
+  ],
+  "errors": []
+}
+

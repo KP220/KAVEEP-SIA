@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaveep.local/sia/schemas/decision-report.schema.json",
+  "title": "KAVEEP-SIA Decision Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "generatedAt",
+    "sourceRecommendationReport",
+    "summary",
+    "decisions",
+    "conflicts",
+    "protectedItems",
+    "errors"
+  ],
+  "properties": {
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "sourceRecommendationReport": { "type": "string" },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "totalItems",
+        "approvedCount",
+        "rejectedCount",
+        "manualReviewCount",
+        "protectedCount",
+        "conflictCount"
+      ],
+      "properties": {
+        "totalItems": { "type": "integer", "minimum": 0 },
+        "approvedCount": { "type": "integer", "minimum": 0 },
+        "rejectedCount": { "type": "integer", "minimum": 0 },
+        "manualReviewCount": { "type": "integer", "minimum": 0 },
+        "protectedCount": { "type": "integer", "minimum": 0 },
+        "conflictCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/decision" }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/conflict" }
+    },
+    "protectedItems": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/protectedItem" }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/error" }
+    }
+  },
+  "$defs": {
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "itemId",
+        "path",
+        "recommendationType",
+        "riskLevel",
+        "suggestedAction",
+        "decision",
+        "approvedForFutureAction",
+        "manualReviewRequired",
+        "blocked",
+        "decidedAt"
+      ],
+      "properties": {
+        "itemId": { "type": "string" },
+        "path": { "type": "string" },
+        "recommendationType": { "type": "string" },
+        "riskLevel": { "$ref": "#/$defs/riskLevel" },
+        "suggestedAction": { "type": "string" },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "approve_for_future_action",
+            "reject",
+            "needs_more_review",
+            "keep_protected",
+            "do_not_touch",
+            "postpone",
+            "ignore_once",
+            "ignore_always"
+          ]
+        },
+        "approvedForFutureAction": { "type": "boolean" },
+        "manualReviewRequired": { "type": "boolean" },
+        "blocked": { "type": "boolean" },
+        "blockReason": { "type": "string" },
+        "userReason": { "type": "string" },
+        "decidedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["itemId", "path", "reason", "status"],
+      "properties": {
+        "itemId": { "type": "string" },
+        "path": { "type": "string" },
+        "reason": { "type": "string" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "protectedItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "reason", "riskLevel"],
+      "properties": {
+        "path": { "type": "string" },
+        "reason": { "type": "string" },
+        "riskLevel": { "$ref": "#/$defs/riskLevel" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "path": { "type": "string" },
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "protected", "unknown"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["recorded", "blocked", "protected", "conflict", "needs_more_review", "UNVERIFIED"]
+    }
+  }
+}
+

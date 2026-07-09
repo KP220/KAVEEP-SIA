@@ -1,0 +1,52 @@
+{
+  "generatedAt": "2026-07-09T08:10:00Z",
+  "scanTarget": "C:\\Users\\ExampleUser\\Downloads",
+  "summary": {
+    "totalRecommendations": 2,
+    "lowRiskCount": 0,
+    "mediumRiskCount": 1,
+    "highRiskCount": 0,
+    "protectedCount": 1,
+    "unknownCount": 0
+  },
+  "recommendations": [
+    {
+      "path": "C:\\Users\\ExampleUser\\Downloads\\sample-installer.exe",
+      "type": "likely_installer",
+      "riskLevel": "medium",
+      "reason": "Installer-like extension and Downloads location; content not inspected.",
+      "suggestedAction": "Review manually before any future action.",
+      "manualReviewRequired": true,
+      "automaticCleanupAllowed": false,
+      "status": "advisory_only"
+    },
+    {
+      "path": "C:\\Users\\ExampleUser\\Downloads\\ExampleProject\\.env",
+      "type": "do_not_touch",
+      "riskLevel": "protected",
+      "reason": "Environment file is protected.",
+      "suggestedAction": "Do not touch.",
+      "manualReviewRequired": true,
+      "automaticCleanupAllowed": false,
+      "status": "do_not_touch"
+    }
+  ],
+  "protectedItems": [
+    {
+      "path": "C:\\Users\\ExampleUser\\Downloads\\ExampleProject\\.env",
+      "reason": "Environment file is protected.",
+      "riskLevel": "protected",
+      "status": "protected"
+    }
+  ],
+  "doNotTouch": [
+    {
+      "path": "C:\\Users\\ExampleUser\\Downloads\\ExampleProject\\.env",
+      "reason": "Protected project configuration.",
+      "riskLevel": "protected",
+      "status": "do_not_touch"
+    }
+  ],
+  "errors": []
+}
+

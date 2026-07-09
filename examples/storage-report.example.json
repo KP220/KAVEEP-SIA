@@ -1,0 +1,57 @@
+{
+  "scanTarget": "C:\\Users\\ExampleUser\\Downloads",
+  "generatedAt": "2026-07-09T08:00:00Z",
+  "totalSizeBytes": 512000000000,
+  "usedSpaceBytes": 320000000000,
+  "freeSpaceBytes": 192000000000,
+  "fileCount": 42,
+  "folderCount": 8,
+  "largestFiles": [
+    {
+      "path": "C:\\Users\\ExampleUser\\Downloads\\sample-file.zip",
+      "sizeBytes": 524288000,
+      "lastModifiedAt": "2026-06-01T12:00:00Z",
+      "riskLevel": "medium",
+      "status": "candidate"
+    }
+  ],
+  "largestFolders": [
+    {
+      "path": "C:\\Users\\ExampleUser\\Downloads\\ArchiveSamples",
+      "sizeBytes": 1073741824,
+      "riskLevel": "medium",
+      "status": "candidate"
+    }
+  ],
+  "duplicateCandidates": [
+    {
+      "candidateId": "dup-001",
+      "paths": [
+        "C:\\Users\\ExampleUser\\Downloads\\sample-file.zip",
+        "C:\\Users\\ExampleUser\\Downloads\\Copy\\sample-file.zip"
+      ],
+      "sizeBytes": 524288000,
+      "evidence": "Same size and filename; content not inspected.",
+      "riskLevel": "unknown",
+      "status": "needs_more_review"
+    }
+  ],
+  "temporaryFileCandidates": [
+    {
+      "path": "C:\\Users\\ExampleUser\\Downloads\\sample-temp.tmp",
+      "sizeBytes": 4096,
+      "riskLevel": "medium",
+      "status": "candidate"
+    }
+  ],
+  "riskyLocations": [
+    {
+      "path": "C:\\Users\\ExampleUser\\AppData\\Local\\ExampleApp",
+      "reason": "AppData location is protected from automatic cleanup.",
+      "riskLevel": "protected",
+      "status": "protected"
+    }
+  ],
+  "errors": []
+}
+
